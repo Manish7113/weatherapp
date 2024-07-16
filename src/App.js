@@ -1,10 +1,11 @@
+import Weather from './components/weather';
+import 'bootstrap/dist/css/bootstrap.css';
 
-import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <p>Hello from weather app</p>
+    <Weather></Weather>
     </div>
   );
 }
