@@ -97,6 +97,12 @@ export default function Weather() {
             case 'Patchy light drizzle' : 
             setBackgroundClass('pdrizzel')
             break;
+            case 'Patchy light rain with thunder' : 
+            setBackgroundClass('prainThunder')
+            break;
+            case 'Patchy light rain' : 
+            setBackgroundClass('PrainLight')
+            break;
             default: setBackgroundClass('clear')
             break;
 

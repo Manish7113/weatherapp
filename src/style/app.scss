@@ -17,6 +17,10 @@ body{
 .Prain{
   background-image: url('../assets/prain.jpg');
 }
+.PrainLight{
+  background-image: url('../assets/lightRain.jpg');
+ 
+}
 .Pcloudy{
   background-image: url('../assets/cloudy.jpg'); 
 
@@ -24,12 +28,15 @@ body{
 .pdrizzel{
   background-image: url('../assets/p1cloudy.jpg'); 
 }
+.prainThunder{
+  background-image: url('../assets/thunderstrom2.jpg'); 
+}
 .weatherPageContainer{
     width: 100%;
     height: 100vh;
     overflow-x: hidden;
     box-sizing: border-box;
-    transition: all ease 2s;
+    transition: all ease 1s;
     background-size: cover;
     background-repeat: no-repeat;
     /* filter: blur(.5px); */
