@@ -105,6 +105,15 @@ body{
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     cursor: pointer;
   }
+  .activeCity{
+    // background-color: white;
+    // color: black;
+    font-size: 1.4rem;
+    color: white;
+   
+    
+
+  }
   .white{
     color: white;
   }
@@ -112,5 +121,25 @@ body{
     width: 85%;
     border-bottom:2px solid white ;
     margin-top: 35px;
+  }
+
+  .blackColor{
+    background-color: white;
+    color: black;
+  }
+
+  .loadingContainer{
+    color: black;
+    background-color: rgb(177, 175, 175);
+    height: 100vh;
+    .loadingImage{
+      width: 150px;
+      height: 150px;
+    }
+    .loadingText{
+      font-size: 1.3rem;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      font-weight: 500;
+    }
   }
   
