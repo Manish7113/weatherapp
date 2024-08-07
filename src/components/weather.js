@@ -17,6 +17,10 @@ export default function Weather() {
     const [daialog, setDaialog] = useState({ isOpen: false })
     const [otherCity, setOtherCity] = useState(['Ujjain', 'Indore', 'Ratlam', 'Dewas'])
     const [loading, setLoading] = useState(true)
+    const [loadingData , setLoadingData] = useState({
+        heading : 'Looking Outside For You',
+        subHeading : 'One Sec...'
+    })
 
 
     useEffect(() => {
@@ -28,6 +32,10 @@ export default function Weather() {
 
     const getCurrentWeather = async () => {
         setLoading(true)
+        setLoadingData({
+            heading : 'Looking Outside For You',
+            subHeading : 'One Sec...'
+        })
         try {
             const response = await axios({
                 method: 'get',
@@ -44,8 +52,12 @@ export default function Weather() {
             }
         }
         catch (error) {
+            setLoadingData({
+                heading :'Trouble To Connect Server',
+                subHeading :'Please Try Again Later'
+            })
             console.log(error, '--------------------')
-            setLoading(false)
+          
         }
 
 
@@ -83,10 +95,7 @@ export default function Weather() {
         setDaialog({ isOpen: false })
     }
 
-    const getCity = (city) => {
-        console.log(city)
-
-    }
+  
 
 
     const getBackgroundImage = (data) => {
@@ -121,6 +130,29 @@ export default function Weather() {
 
     }
 
+
+    const activeCity = (city) => {
+        const updatedCities = otherCity.filter((item)=> item !== city)
+        updatedCities.unshift(city)
+        setOtherCity(updatedCities)
+    }
+
+    const getCity = (city) => {
+        if(otherCity?.includes(city))
+        {
+            activeCity(city)
+        }
+        else{
+           const otherCity2 = otherCity
+           otherCity2.pop()
+           otherCity2.unshift(city)
+           setCity(city)
+           setOtherCity(otherCity2)
+
+        }
+
+    }
+
    
 
 
@@ -129,9 +161,9 @@ export default function Weather() {
             {
                 loading ? <div className=' d-flex flex-column justify-content-center align-items-center  loadingContainer'>
                     <img src={loadingImage} alt="not found" className="loadingImage"></img>
-                    <p className="m-0 p-0 loadingText">Looking Outside For You</p>
+                    <p className="m-0 p-0 loadingText">{loadingData?.heading}</p>
                     {/* <p className="m-0 p-0 ">Please Wait...</p> */}
-                    <p className="m-0 p-0 loadingText">One Sec...</p>
+                    <p className="m-0 p-0 loadingText">{loadingData?.subHeading}</p>
 
                 </div> : <div className={`weatherPageContainer ${backgroundClass}`}>
                     <Grid container spacing={1}>
@@ -175,6 +207,7 @@ export default function Weather() {
                                             {otherCity?.map((item, index) => (
                                                 <p key={index} className={`nearCityName ${city === item ? 'activeCity' : null}`} onClick={() => {
                                                     setCity(item)
+                                                    activeCity(item)
                                                 }}>{item}</p>
 
                                             ))}
