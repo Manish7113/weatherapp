@@ -33,7 +33,7 @@ export default function Dailoge({  isOpen = 'false', handleClose, sendCity }) {
             >
                 <Grid container spacing={0}>
                     <Grid item xs={11} sm={11} lg={11} xl={11}>
-                        <DialogTitle>{"Hire me by fill the form "}</DialogTitle>
+                        <DialogTitle>{"Select Your City"}</DialogTitle>
 
                     </Grid>
                     <Grid item xs={1} sm={1} lg={1} xl={1} className='d-flex justify-content-center align-items-start pt-2'>

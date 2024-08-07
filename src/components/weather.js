@@ -38,7 +38,9 @@ export default function Weather() {
                 console.log(response?.data)
                 setCrrForcast(response?.data)
                 getBackgroundImage(response?.data)
-                setLoading(false)
+                setTimeout(()=>{
+                    setLoading(false)
+                },2000)
             }
         }
         catch (error) {
@@ -161,7 +163,7 @@ export default function Weather() {
                                         <div className="d-flex justify-content-between align-items-end gap-5">
                                             <input type='text' className="inputField" placeholder="Another Location" onClick={() => {
                                                 setDaialog({ isOpen: true })
-                                            }}disabled></input>
+                                            }}></input>
 
                                             <button className="iconContainer d-flex justify-content-center align-items-center rounded-2 white" >
                                                 <Icon icon="quill:search" width="32" height="32" />
