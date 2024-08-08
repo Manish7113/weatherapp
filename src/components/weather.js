@@ -43,9 +43,10 @@ export default function Weather() {
 
             });
             if (response?.data) {
-                console.log(response?.data)
+                // console.log(response?.data)
                 setCrrForcast(response?.data)
                 getBackgroundImage(response?.data)
+                
                 setTimeout(()=>{
                     setLoading(false)
                 },2000)
@@ -99,10 +100,13 @@ export default function Weather() {
 
 
     const getBackgroundImage = (data) => {
-        console.log(data?.current?.condition?.text, '====================================')
+        // console.log(data?.current?.condition?.text, '====================================')
         switch (data?.current?.condition?.text) {
-            case 'Partly cloudy':
+            case 'Partly cloudy' && 'Partly Cloudy':
                 setBackgroundClass('Pcloudy')
+                break;
+            case 'Cloudy':
+                setBackgroundClass('p1Cloudy')
                 break;
             case 'Patchy rain nearby':
                 setBackgroundClass('Prain')
@@ -153,6 +157,36 @@ export default function Weather() {
 
     }
 
+
+    const renderIcon = (condtionString) =>{
+
+        const condition = condtionString.toLowerCase()
+        
+        let reReturnCondtion  = 'None'
+       
+        switch(true){
+            case condition.includes('patchy rain') || condition.includes('patchy light drizzle') ||  condition.includes('light drizzle')  :
+                
+                reReturnCondtion =  "lets-icons:rain-light" 
+                break;
+            case condition.includes('overcast') || condition.includes('cloudy') : // high cloudy     
+                reReturnCondtion =  "carbon:cloudy"
+                break;
+            case condition.includes('rain'):
+                reReturnCondtion =  "ion:rainy-outline" 
+                break;
+                case condition.includes('sunny') || condition.includes('clear') :    
+                reReturnCondtion = "ph:sun-duotone"
+                break;
+            default:
+                reReturnCondtion =   "ph:sun-duotone"
+                break;
+
+        }
+
+        return reReturnCondtion
+    }
+
    
 
 
@@ -178,8 +212,11 @@ export default function Weather() {
                                         <p className="p-0 m-0 ">{d?.getHours()} : {d?.getMinutes()} {' '} {getCurrentDay()} {d.getDate()} {'Jul'} {d.getFullYear()}</p>
                                     </div>
                                     <div>
-                                        <Icon icon="ion:rainy-outline" className="icon" />
+
+                                        <Icon icon={renderIcon(crrForcast?.current?.condition?.text)} className="icon" />
+                                        
                                         <p className="m-0 p-0">{crrForcast?.current?.condition?.text}</p>
+                                        {/* {renderIcon(crrForcast?.current?.condition?.text)} */}
                                     </div>
 
                                 </div>
