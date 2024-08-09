@@ -90,6 +90,39 @@ export default function Weather() {
         }
 
     }
+    const getCurrentMonth = () => {
+        const crrMonth = d?.getMonth()
+        switch (crrMonth) {
+            case 0: return 'Jan'
+                break;
+            case 1: return 'Feb'
+                break;
+            case 2: return 'Mar'
+                break;
+            case 3: return 'Apr'
+                break;
+            case 4: return 'May'
+                break;
+            case 5: return 'Jun'
+                break;
+            case 6: return 'Jul'
+                break;
+            case 7: return 'Aug'
+                break;
+            case 8: return 'Sept'
+                break;
+            case 9: return 'Oct'
+                break;
+            case 10: return 'Nov'
+                break;
+            case 11: return 'Dec'
+                break;
+            default: return ''
+                break;
+
+        }
+
+    }
 
 
     const toggleDailog = () => {
@@ -126,24 +159,29 @@ export default function Weather() {
     const getBackgroundImage = (condtionString) => {
         
         const condition = condtionString?.current?.condition?.text.toLowerCase()
+        
+       
         switch (true) {
             case condition.includes('thunderstorm') || condition.includes('thunder'):
                 setBackgroundClass('prainThunder')
                 break;
             case condition.includes('patchy rain') || condition.includes('patchy light drizzle') || condition.includes('light drizzle') || condition.includes('light rain shower'):
-                setBackgroundClass('Prain')
+                setBackgroundClass('prain')
                 break;
             case condition.includes('overcast') : // high cloudy     
-            setBackgroundClass('p1Cloudy')
+             setBackgroundClass('overcast')
                 break;
             case condition.includes('partly cloudy') || condition.includes('cloudy'): // high cloudy     
                 setBackgroundClass('Pcloudy')
                 break;
             case condition.includes('fog'): // high cloudy     
-            setBackgroundClass('clear')
+            setBackgroundClass('fog')
                 break;
             case condition.includes('rain'):
-                setBackgroundClass('clear')
+                setBackgroundClass('rain')
+                break;
+            case condition.includes('cloudy'):
+                setBackgroundClass('cloudy')
                 break;
             case condition.includes('sunny') || condition.includes('clear'):
                 setBackgroundClass('clear')
@@ -216,7 +254,7 @@ export default function Weather() {
                                     <h1 className="centigrade">{crrForcast?.current?.temp_c || ''}°</h1>
                                     <div className="d-felx flex-column gap-0">
                                         <h4 className="p-0 m-0 city"> {crrForcast?.location?.name || ''}</h4>
-                                        <p className="p-0 m-0 ">{d?.getHours()} : {d?.getMinutes()} {' '} {getCurrentDay()} {d.getDate()} {'Jul'} {d.getFullYear()}</p>
+                                        <p className="p-0 m-0 ">{d?.getHours()} : {d?.getMinutes()} {' '} {getCurrentDay()} {d.getDate()} {getCurrentMonth()} {d.getFullYear()}</p>
                                     </div>
                                     <div>
 

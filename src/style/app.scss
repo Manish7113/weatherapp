@@ -14,24 +14,34 @@ body{
 .clear{
   background-image: url('../assets/sunny.jpg'); 
 }
-.Prain{
-  background-image: url('../assets/prain.jpg');
+.prain{
+  background-image: url('../assets/rain.jpg');
 }
-.PrainLight{
-  background-image: url('../assets/lightRain.jpg');
+.rain{
+  background-image: url('../assets/prain.jpg');
  
 }
 .Pcloudy{
-  background-image: url('../assets/cloudy.jpg'); 
+  background-image: url('../assets/pcloudy.jpg'); 
+
+}
+.overcast{
+  background-image: url('../assets/darkcloud.jpg'); 
 
 }
 .p1Cloudy{
   background-image: url('../assets/pcloudy.jpg'); 
 
 }
-.pdrizzel{
+.cloudy{
   background-image: url('../assets/p1cloudy.jpg'); 
+
 }
+.fog{
+  background-image: url('../assets/fog.jpg'); 
+
+}
+
 .prainThunder{
   background-image: url('../assets/thunderstrom2.jpg'); 
 }
