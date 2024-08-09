@@ -17,9 +17,9 @@ export default function Weather() {
     const [daialog, setDaialog] = useState({ isOpen: false })
     const [otherCity, setOtherCity] = useState(['Ujjain', 'Indore', 'Ratlam', 'Dewas'])
     const [loading, setLoading] = useState(true)
-    const [loadingData , setLoadingData] = useState({
-        heading : 'Looking Outside For You',
-        subHeading : 'One Sec...'
+    const [loadingData, setLoadingData] = useState({
+        heading: 'Looking Outside For You',
+        subHeading: 'One Sec...'
     })
 
 
@@ -33,8 +33,8 @@ export default function Weather() {
     const getCurrentWeather = async () => {
         setLoading(true)
         setLoadingData({
-            heading : 'Looking Outside For You',
-            subHeading : 'One Sec...'
+            heading: 'Looking Outside For You',
+            subHeading: 'One Sec...'
         })
         try {
             const response = await axios({
@@ -46,19 +46,19 @@ export default function Weather() {
                 // console.log(response?.data)
                 setCrrForcast(response?.data)
                 getBackgroundImage(response?.data)
-                
-                setTimeout(()=>{
+
+                setTimeout(() => {
                     setLoading(false)
-                },2000)
+                }, 2000)
             }
         }
         catch (error) {
             setLoadingData({
-                heading :'Trouble To Connect Server',
-                subHeading :'Please Try Again Later'
+                heading: 'Trouble To Connect Server',
+                subHeading: 'Please Try Again Later'
             })
             console.log(error, '--------------------')
-          
+
         }
 
 
@@ -96,93 +96,97 @@ export default function Weather() {
         setDaialog({ isOpen: false })
     }
 
-  
 
 
-    const getBackgroundImage = (data) => {
-        // console.log(data?.current?.condition?.text, '====================================')
-        switch (data?.current?.condition?.text) {
-            case 'Partly cloudy' && 'Partly Cloudy':
-                setBackgroundClass('Pcloudy')
-                break;
-            case 'Cloudy':
-                setBackgroundClass('p1Cloudy')
-                break;
-            case 'Patchy rain nearby':
-                setBackgroundClass('Prain')
-                break;
-            case 'Light rain shower':
-                setBackgroundClass('Prain')
-                break;
-            case 'Patchy light drizzle':
-                setBackgroundClass('pdrizzel')
-                break;
-            case 'Patchy light rain with thunder':
-                setBackgroundClass('prainThunder')
-                break;
-            case 'Patchy light rain':
-                setBackgroundClass('PrainLight')
-                break;
-            case 'Light drizzle':
-                setBackgroundClass('PrainLight')
-                break;
-            default: setBackgroundClass('clear')
-                break;
 
 
-        }
-
-    }
 
 
     const activeCity = (city) => {
-        const updatedCities = otherCity.filter((item)=> item !== city)
+        const updatedCities = otherCity.filter((item) => item !== city)
         updatedCities.unshift(city)
         setOtherCity(updatedCities)
     }
 
     const getCity = (city) => {
-        if(otherCity?.includes(city))
-        {
+        if (otherCity?.includes(city)) {
             activeCity(city)
         }
-        else{
-           const otherCity2 = otherCity
-           otherCity2.pop()
-           otherCity2.unshift(city)
-           setCity(city)
-           setOtherCity(otherCity2)
+        else {
+            const otherCity2 = otherCity
+            otherCity2.pop()
+            otherCity2.unshift(city)
+            setCity(city)
+            setOtherCity(otherCity2)
 
         }
 
     }
 
-
-    const renderIcon = (condtionString) =>{
-
-        const condition = condtionString.toLowerCase()
+    const getBackgroundImage = (condtionString) => {
         
-        let reReturnCondtion  = 'None'
-       
-        switch(true){
-            case condition.includes('patchy rain') || condition.includes('patchy light drizzle') ||  condition.includes('light drizzle')  :
-                
-                reReturnCondtion =  "lets-icons:rain-light" 
+        const condition = condtionString?.current?.condition?.text.toLowerCase()
+        switch (true) {
+            case condition.includes('thunderstorm') || condition.includes('thunder'):
+                setBackgroundClass('prainThunder')
                 break;
-            case condition.includes('overcast') || condition.includes('cloudy') : // high cloudy     
-                reReturnCondtion =  "carbon:cloudy"
+            case condition.includes('patchy rain') || condition.includes('patchy light drizzle') || condition.includes('light drizzle') || condition.includes('light rain shower'):
+                setBackgroundClass('Prain')
                 break;
-            case condition.includes('fog')  : // high cloudy     
-                reReturnCondtion =  "solar:fog-line-duotone"
+            case condition.includes('overcast') : // high cloudy     
+            setBackgroundClass('p1Cloudy')
+                break;
+            case condition.includes('partly cloudy') || condition.includes('cloudy'): // high cloudy     
+                setBackgroundClass('Pcloudy')
+                break;
+            case condition.includes('fog'): // high cloudy     
+            setBackgroundClass('clear')
                 break;
             case condition.includes('rain'):
-                reReturnCondtion =  "ion:rainy-outline" 
+                setBackgroundClass('clear')
                 break;
-                case condition.includes('sunny') || condition.includes('clear') :    
+            case condition.includes('sunny') || condition.includes('clear'):
+                setBackgroundClass('clear')
+                break;
+
+            default:
+                setBackgroundClass('clear')
+                break;
+
+        }
+
+    
+
+    }
+
+
+    const renderIcon = (condtionString) => {
+
+        const condition = condtionString.toLowerCase()
+
+        let reReturnCondtion = 'None'
+
+        switch (true) {
+            case condition.includes('patchy rain') || condition.includes('patchy light drizzle') || condition.includes('light drizzle'):
+                reReturnCondtion = "lets-icons:rain-light"
+                break;
+            case condition.includes('overcast') || condition.includes('cloudy'): // high cloudy     
+                reReturnCondtion = "carbon:cloudy"
+                break;
+            case condition.includes('fog'): // high cloudy     
+                reReturnCondtion = "solar:fog-line-duotone"
+                break;
+            case condition.includes('rain'):
+                reReturnCondtion = "ion:rainy-outline"
+                break;
+            case condition.includes('sunny') || condition.includes('clear'):
                 reReturnCondtion = "ph:sun-duotone"
                 break;
+            case condition.includes('thunderstorm ') || condition.includes('thunder'):
+                reReturnCondtion = "iconoir:thunderstorm"
+                break;
             default:
-                reReturnCondtion =   "ph:sun-duotone"
+                reReturnCondtion = "ph:sun-duotone"
                 break;
 
         }
@@ -190,7 +194,7 @@ export default function Weather() {
         return reReturnCondtion
     }
 
-   
+
 
 
     return (
@@ -217,7 +221,7 @@ export default function Weather() {
                                     <div>
 
                                         <Icon icon={renderIcon(crrForcast?.current?.condition?.text)} className="icon" />
-                                        
+
                                         <p className="m-0 p-0">{crrForcast?.current?.condition?.text}</p>
                                         {/* {renderIcon(crrForcast?.current?.condition?.text)} */}
                                     </div>
