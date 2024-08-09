@@ -1,7 +1,7 @@
 import { Icon } from "@iconify/react"
 import { Grid } from "@mui/material"
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useEffect, useLayoutEffect, useState } from "react"
 import React from 'react';
 import Dailoge from "./dailoge";
 import loadingImage from '../assets/loading.png'
@@ -12,15 +12,39 @@ import loadingImage from '../assets/loading.png'
 export default function Weather() {
 
     const [crrForcast, setCrrForcast] = useState(null)
-    const [city, setCity] = useState('Indore')
+    const [city, setCity] = useState()
     const [backgroundClass, setBackgroundClass] = useState('clear')
     const [daialog, setDaialog] = useState({ isOpen: false })
-    const [otherCity, setOtherCity] = useState(['Ujjain', 'Indore', 'Ratlam', 'Dewas'])
+    const [otherCity, setOtherCity] = useState()
     const [loading, setLoading] = useState(true)
     const [loadingData, setLoadingData] = useState({
         heading: 'Looking Outside For You',
         subHeading: 'One Sec...'
     })
+
+
+    useLayoutEffect(() => {
+
+        const cityList = localStorage.getItem('cityList')
+        const crrCity = localStorage.getItem('crrCity')
+        if (cityList) {
+            let arr = cityList.split(',')
+            setOtherCity(arr)
+        }
+        else{
+            setOtherCity(['New Delhi', 'London', 'Washington', 'Moscow'])
+        }
+
+
+        if (crrCity) {
+
+            setCity(crrCity)
+        }
+        else{
+            setCity('New Delhi')
+        }
+
+    }, [])
 
 
     useEffect(() => {
@@ -36,29 +60,32 @@ export default function Weather() {
             heading: 'Looking Outside For You',
             subHeading: 'One Sec...'
         })
-        try {
-            const response = await axios({
-                method: 'get',
-                url: `https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_API_KEY}&q=${city}&days=1&aqi=yes&alerts=yes`,
-
-            });
-            if (response?.data) {
-                // console.log(response?.data)
-                setCrrForcast(response?.data)
-                getBackgroundImage(response?.data)
-
-                setTimeout(() => {
-                    setLoading(false)
-                }, 2000)
+        if(city)
+        {
+            try {
+                const response = await axios({
+                    method: 'get',
+                    url: `https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_API_KEY}&q=${city}&days=1&aqi=yes&alerts=yes`,
+    
+                });
+                if (response?.data) {
+                   
+                    setCrrForcast(response?.data)
+                    getBackgroundImage(response?.data)
+    
+                    setTimeout(() => {
+                        setLoading(false)
+                    }, 2000)
+                }
             }
-        }
-        catch (error) {
-            setLoadingData({
-                heading: 'Trouble To Connect Server',
-                subHeading: 'Please Try Again Later'
-            })
-            console.log(error, '--------------------')
-
+            catch (error) {
+                setLoadingData({
+                    heading: 'Trouble To Connect Server',
+                    subHeading: 'Please Try Again Later'
+                })
+                console.log(error, '--------------------')
+    
+            }
         }
 
 
@@ -139,11 +166,13 @@ export default function Weather() {
         const updatedCities = otherCity.filter((item) => item !== city)
         updatedCities.unshift(city)
         setOtherCity(updatedCities)
+        localStorage.setItem('crrCity', city)
     }
 
     const getCity = (city) => {
         if (otherCity?.includes(city)) {
             activeCity(city)
+            localStorage.setItem('crrCity', city)
         }
         else {
             const otherCity2 = otherCity
@@ -151,16 +180,18 @@ export default function Weather() {
             otherCity2.unshift(city)
             setCity(city)
             setOtherCity(otherCity2)
+            localStorage.setItem('cityList', otherCity2)
+            localStorage.setItem('crrCity', city)
 
         }
 
     }
 
     const getBackgroundImage = (condtionString) => {
-        
+
         const condition = condtionString?.current?.condition?.text.toLowerCase()
-        
-       
+
+
         switch (true) {
             case condition.includes('thunderstorm') || condition.includes('thunder'):
                 setBackgroundClass('prainThunder')
@@ -168,14 +199,14 @@ export default function Weather() {
             case condition.includes('patchy rain') || condition.includes('patchy light drizzle') || condition.includes('light drizzle') || condition.includes('light rain shower'):
                 setBackgroundClass('prain')
                 break;
-            case condition.includes('overcast') : // high cloudy     
-             setBackgroundClass('overcast')
+            case condition.includes('overcast'): // high cloudy     
+                setBackgroundClass('overcast')
                 break;
             case condition.includes('partly cloudy') || condition.includes('cloudy'): // high cloudy     
                 setBackgroundClass('Pcloudy')
                 break;
             case condition.includes('fog'): // high cloudy     
-            setBackgroundClass('fog')
+                setBackgroundClass('fog')
                 break;
             case condition.includes('rain'):
                 setBackgroundClass('rain')
@@ -193,7 +224,7 @@ export default function Weather() {
 
         }
 
-    
+
 
     }
 
