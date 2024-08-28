@@ -70,6 +70,7 @@ export default function Weather() {
                 });
                 if (response?.data) {
                    
+                    console.log(response?.data)
                     setCrrForcast(response?.data)
                     getBackgroundImage(response?.data)
     
@@ -205,7 +206,7 @@ export default function Weather() {
             case condition.includes('partly cloudy') || condition.includes('cloudy'): // high cloudy     
                 setBackgroundClass('Pcloudy')
                 break;
-            case condition.includes('fog'): // high cloudy     
+            case condition.includes('fog') || condition.includes('mist'): // high cloudy     
                 setBackgroundClass('fog')
                 break;
             case condition.includes('rain'):
@@ -369,6 +370,13 @@ export default function Weather() {
 
 
                     </Grid>
+                    {/* <Grid conatiner spacing={2}>
+                        <p>Hello world</p>
+
+                    </Grid> */}
+                    <div className="d-flex justify-content-center align-items-center bgnavyBlue w-100">
+                        <h1>Hello ji </h1>
+                    </div>
                     <Dailoge isOpen={daialog?.isOpen} handleClose={toggleDailog} sendCity={getCity} ></Dailoge>
                 </div>
             }
