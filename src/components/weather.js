@@ -5,6 +5,7 @@ import { useEffect, useLayoutEffect, useState } from "react"
 import React from 'react';
 import Dailoge from "./dailoge";
 import loadingImage from '../assets/loading.png'
+import WeatherCard from "./weatherCard";
 
 
 
@@ -31,7 +32,7 @@ export default function Weather() {
             let arr = cityList.split(',')
             setOtherCity(arr)
         }
-        else{
+        else {
             setOtherCity(['New Delhi', 'London', 'Washington', 'Moscow'])
         }
 
@@ -40,7 +41,7 @@ export default function Weather() {
 
             setCity(crrCity)
         }
-        else{
+        else {
             setCity('New Delhi')
         }
 
@@ -60,20 +61,20 @@ export default function Weather() {
             heading: 'Looking Outside For You',
             subHeading: 'One Sec...'
         })
-        if(city)
-        {
+        if (city) {
+
             try {
                 const response = await axios({
                     method: 'get',
                     url: `https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_API_KEY}&q=${city}&days=1&aqi=yes&alerts=yes`,
-    
+
                 });
                 if (response?.data) {
-                   
+
                     console.log(response?.data)
                     setCrrForcast(response?.data)
                     getBackgroundImage(response?.data)
-    
+
                     setTimeout(() => {
                         setLoading(false)
                     }, 2000)
@@ -85,7 +86,7 @@ export default function Weather() {
                     subHeading: 'Please Try Again Later'
                 })
                 console.log(error, '--------------------')
-    
+
             }
         }
 
@@ -266,7 +267,6 @@ export default function Weather() {
 
 
 
-
     return (
         <>
             {
@@ -370,10 +370,17 @@ export default function Weather() {
 
 
                     </Grid>
-                    
-                    {/* <div className="d-flex justify-content-center align-items-center bgnavyBlue w-100">
-                        <h1>Hello ji </h1>
-                    </div> */}
+
+                    <div className="bgnavyBlue w-100">
+                        <div className="d-flex justify-content-center align-items-center flex-wrap">
+                            {
+                                crrForcast?.forecast?.forecastday[0].hour?.map((item, index)=>(
+
+                                    <WeatherCard key={index} data={item} hourTime={index}></WeatherCard>
+                                ))
+                            }
+                        </div>
+                    </div>
                     <Dailoge isOpen={daialog?.isOpen} handleClose={toggleDailog} sendCity={getCity} ></Dailoge>
                 </div>
             }

@@ -161,6 +161,17 @@ body{
   // second section
 
   .bgnavyBlue{
-    background-color: navy;
+    background-color: rgb(28, 28, 73);
+  }
+
+  .weatherCard{
+     min-width: 300px;
+     max-width: 300px;
+     max-height: 400px;
+  }
+  .cardIcon{
+    color: white;
+    width: 20px;
+
   }
   
