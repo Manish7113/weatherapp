@@ -370,13 +370,10 @@ export default function Weather() {
 
 
                     </Grid>
-                    {/* <Grid conatiner spacing={2}>
-                        <p>Hello world</p>
-
-                    </Grid> */}
-                    <div className="d-flex justify-content-center align-items-center bgnavyBlue w-100">
+                    
+                    {/* <div className="d-flex justify-content-center align-items-center bgnavyBlue w-100">
                         <h1>Hello ji </h1>
-                    </div>
+                    </div> */}
                     <Dailoge isOpen={daialog?.isOpen} handleClose={toggleDailog} sendCity={getCity} ></Dailoge>
                 </div>
             }
