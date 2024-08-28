@@ -5,6 +5,7 @@ export default function WeatherCard({data, hourTime}){
     console.log(data, 'data')
 
     const renderIcon = (condtionString) => {
+        console.log(condtionString , '=========================')
 
         const condition = condtionString.toLowerCase()
 
@@ -34,6 +35,7 @@ export default function WeatherCard({data, hourTime}){
                 break;
 
         }
+        console.log(reReturnCondtion , '++++++++++++++++++++')
 
         return reReturnCondtion
     }
@@ -41,8 +43,11 @@ export default function WeatherCard({data, hourTime}){
     return(
         <div className="weatherCard">
             <div className='d-flex flex-column justify-content-center align-items-center wrap'>
-            {/* <Icon icon={renderIcon(data?.condition?.text)} className="cardIcon" /> */}
-            <p>{hourTime} </p>
+            <p className="time d-flex justify-content-center align-item-center">12:45 AM </p>
+            <div>
+            <Icon icon={renderIcon(data?.condition?.text)} className="icon" />
+
+            </div>
 
             </div>
 

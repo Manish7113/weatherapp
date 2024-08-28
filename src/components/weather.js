@@ -6,6 +6,8 @@ import React from 'react';
 import Dailoge from "./dailoge";
 import loadingImage from '../assets/loading.png'
 import WeatherCard from "./weatherCard";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 
 
 
@@ -371,14 +373,44 @@ export default function Weather() {
 
                     </Grid>
 
-                    <div className="bgnavyBlue w-100">
-                        <div className="d-flex justify-content-center align-items-center flex-wrap">
-                            {
-                                crrForcast?.forecast?.forecastday[0].hour?.map((item, index)=>(
+                    <div className="bgnavyBlue w-100 ">
+                        <div className="d-flex justify-content-center align-items-center container w-100">
+                            <Swiper
+                                spaceBetween={10}
+                                // slidesPerView={3}
+                                breakpoints={{
+                                    // when window width is >= 320px
+                                    320: {
+                                      slidesPerView: 1,
+                                    },
+                                    // when window width is >= 480px
+                                    480: {
+                                      slidesPerView: 1,
+                                    },
+                                    // when window width is >= 768px
+                                    768: {
+                                      slidesPerView: 2,
+                                    },
+                                    // when window width is >= 1024px
+                                    1024: {
+                                      slidesPerView: 3,
+                                    },
+                                  }}
+                                onSlideChange={() => console.log('slide change')}
+                                onSwiper={(swiper) => console.log(swiper)}
+                            >
+                                 {
+                                crrForcast?.forecast?.forecastday[0].hour?.map((item, index) => (
 
-                                    <WeatherCard key={index} data={item} hourTime={index}></WeatherCard>
+                                    <SwiperSlide key={index}><WeatherCard  data={item} hourTime={index}></WeatherCard></SwiperSlide>
+                                    
                                 ))
                             }
+                                
+                                
+                               
+                            </Swiper>
+                           
                         </div>
                     </div>
                     <Dailoge isOpen={daialog?.isOpen} handleClose={toggleDailog} sendCity={getCity} ></Dailoge>
