@@ -186,10 +186,12 @@ body {
   padding-top: 50px;
   padding-bottom: 50px;
   background-image: linear-gradient(to bottom right, #babae4, #2c2c73);
+  height: 100vh;
 }
 
 .weatherCard {
   min-width: 250px;
+  width: 100%;
   max-width: 300px;
   max-height: 400px;
   height: 400px;
@@ -203,7 +205,12 @@ body {
 
 .cardIcon {
   color: white;
-  width: 20px;
+  // width: 100px;
+  padding: 15px;
+  font-size: 5rem;
+  border: 2px solid white;
+  border-radius: 50%;
+
 
 }
 
@@ -216,4 +223,22 @@ body {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   cursor: pointer;
 
+}
+
+.tempHeading{
+  font-size: 2.5rem;
+  font-weight: 500;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  cursor: pointer;
+  color: white;
+}
+.weatherReport{
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  cursor: pointer;
+  color: white;
+}
+.font-24{
+  font-size: 30px;
 }

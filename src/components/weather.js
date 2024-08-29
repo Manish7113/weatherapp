@@ -318,6 +318,7 @@ export default function Weather() {
                                             </button>
                                         </div>
                                     </Grid>
+                                   
                                     {otherCity?.length ? <Grid item xs={12} sm={12}>
                                         <div className="mt-5">
                                             {otherCity?.map((item, index) => (
@@ -373,7 +374,7 @@ export default function Weather() {
 
                     </Grid>
 
-                    <div className="bgnavyBlue w-100 ">
+                    <div className="bgnavyBlue w-100 d-flex justify-content-center align-items-center ">
                         <div className="d-flex justify-content-center align-items-center container w-100">
                             <Swiper
                                 spaceBetween={10}
