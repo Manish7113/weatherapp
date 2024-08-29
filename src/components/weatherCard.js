@@ -3,10 +3,10 @@ import { Grid } from "@mui/material"
 
 export default function WeatherCard({data, hourTime}){
 
-    console.log(data, 'data')
+  
 
     const renderIcon = (condtionString) => {
-        console.log(condtionString , '=========================')
+        
 
         const condition = condtionString.toLowerCase()
 
@@ -44,7 +44,7 @@ export default function WeatherCard({data, hourTime}){
     const getTime = (time) =>{
         const arr = time.split(' ')
         const realTime  = formatTimeTo12Hour(arr[1])
-        console.log(realTime)
+        
         return realTime
     }
 
@@ -80,12 +80,22 @@ export default function WeatherCard({data, hourTime}){
 
             </div>
             <p className="weatherReport p-0 m-0">{data?.condition?.text} </p>
+           
+
             <Grid container spacing={2} className="mt-2">
                 <Grid item xs={12} className="m-0 p-0">
                     <div className="d-flex justify-content-start align-items-center flex-wrap gap-1">
                     <Icon icon="material-symbols:humidity-percentage-outline-rounded" className="white font-24" />
-                        <span className="m-0 p-0 white weatherReport">86 %</span>
+                        <span className="m-0 p-0 white weatherReport">{data?.humidity} %</span>
                         <span className="m-0 p-0 white weatherReport">Humidity</span>                       
+                    </div>
+                </Grid>
+                <Grid item xs={12} className="m-0 p-0">
+                    <div className="d-flex justify-content-start align-items-center flex-wrap gap-1">
+                    <Icon  icon="solar:cloud-linear" className="white font-24" />
+                    
+                        <span className="m-0 p-0 white weatherReport">{data?.cloud} %</span>
+                        <span className="m-0 p-0 white weatherReport">Cloudy</span>                       
                     </div>
                 </Grid>
                 <Grid item xs={12} className="m-0 p-0">
@@ -97,6 +107,7 @@ export default function WeatherCard({data, hourTime}){
                     </div>
                 </Grid>
             </Grid>
+            
            
             
 

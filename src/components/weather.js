@@ -73,7 +73,7 @@ export default function Weather() {
                 });
                 if (response?.data) {
 
-                    console.log(response?.data)
+                    
                     setCrrForcast(response?.data)
                     getBackgroundImage(response?.data)
 
@@ -378,6 +378,7 @@ export default function Weather() {
                         <div className="d-flex justify-content-center align-items-center container w-100">
                             <Swiper
                                 spaceBetween={10}
+                                
                                 // slidesPerView={3}
                                 breakpoints={{
                                     // when window width is >= 320px
@@ -397,8 +398,7 @@ export default function Weather() {
                                       slidesPerView: 3,
                                     },
                                   }}
-                                onSlideChange={() => console.log('slide change')}
-                                onSwiper={(swiper) => console.log(swiper)}
+                               
                             >
                                  {
                                 crrForcast?.forecast?.forecastday[0].hour?.map((item, index) => (
