@@ -182,7 +182,8 @@ body {
 // second section
 
 .bgnavyBlue {
-  background-color: rgba(16, 16, 16, 0.637);
+  // background-color: rgba(16, 16, 16, 0.637);
+  background-image: linear-gradient(to bottom, rgba(16, 16, 16, 0.694), rgba(16, 16, 16, 0.283));
   padding-top: 50px;
   padding-bottom: 50px;
   // background-image: linear-gradient(to bottom right, #babae4, #2c2c73);
@@ -199,7 +200,7 @@ body {
   margin: 10px;
   color: black;
   padding-top: 10px;
-  background-image: linear-gradient(to bottom, #ff7520, #ffc49f);
+  background-image: linear-gradient(to bottom, #c35bf0, #b22cec);
 
 }
 
