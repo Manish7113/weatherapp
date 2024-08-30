@@ -8,6 +8,8 @@ import loadingImage from '../assets/loading.png'
 import WeatherCard from "./weatherCard";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import 'swiper/css/navigation';
 
 
 
@@ -73,7 +75,7 @@ export default function Weather() {
                 });
                 if (response?.data) {
 
-                    
+
                     setCrrForcast(response?.data)
                     getBackgroundImage(response?.data)
 
@@ -318,7 +320,7 @@ export default function Weather() {
                                             </button>
                                         </div>
                                     </Grid>
-                                   
+
                                     {otherCity?.length ? <Grid item xs={12} sm={12}>
                                         <div className="mt-5">
                                             {otherCity?.map((item, index) => (
@@ -377,41 +379,43 @@ export default function Weather() {
                     <div className="bgnavyBlue w-100 d-flex justify-content-center align-items-center ">
                         <div className="d-flex justify-content-center align-items-center container w-100">
                             <Swiper
+                                modules={[Navigation, Pagination, Scrollbar, A11y]}
+                                navigation
                                 spaceBetween={10}
-                                
+
                                 // slidesPerView={3}
                                 breakpoints={{
                                     // when window width is >= 320px
                                     320: {
-                                      slidesPerView: 1,
+                                        slidesPerView: 1.2,
                                     },
                                     // when window width is >= 480px
                                     480: {
-                                      slidesPerView: 1,
+                                        slidesPerView: 1.2,
                                     },
                                     // when window width is >= 768px
                                     768: {
-                                      slidesPerView: 2,
+                                        slidesPerView: 2.2,
                                     },
                                     // when window width is >= 1024px
                                     1024: {
-                                      slidesPerView: 3,
+                                        slidesPerView: 3.2,
                                     },
-                                  }}
-                               
-                            >
-                                 {
-                                crrForcast?.forecast?.forecastday[0].hour?.map((item, index) => (
+                                }}
 
-                                    <SwiperSlide key={index}><WeatherCard  data={item} hourTime={index}></WeatherCard></SwiperSlide>
-                                    
-                                ))
-                            }
-                                
-                                
-                               
+                            >
+                                {
+                                    crrForcast?.forecast?.forecastday[0].hour?.map((item, index) => (
+
+                                        <SwiperSlide key={index}><WeatherCard data={item} hourTime={index}></WeatherCard></SwiperSlide>
+
+                                    ))
+                                }
+
+
+
                             </Swiper>
-                           
+
                         </div>
                     </div>
                     <Dailoge isOpen={daialog?.isOpen} handleClose={toggleDailog} sendCity={getCity} ></Dailoge>
