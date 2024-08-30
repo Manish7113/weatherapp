@@ -156,7 +156,7 @@ export default function WeatherCard({data, hourTime}){
                         <span className="m-0 p-0 white weatherReport">KPH</span>                       
                     </div>
                 </Grid>
-                <Grid item xs={6}  className="m-0 p-0">
+                <Grid item xs={12}  className="m-0 p-0">
                     <div className="d-flex justify-content-start align-items-center flex-wrap gap-1">
                     <Icon  icon="solar:cloud-linear" className="white font-24" />
                     

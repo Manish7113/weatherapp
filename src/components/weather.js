@@ -391,7 +391,7 @@ export default function Weather() {
                                     },
                                     // when window width is >= 480px
                                     480: {
-                                        slidesPerView: 1.2,
+                                        slidesPerView: 1.6,
                                     },
                                     // when window width is >= 768px
                                     768: {
