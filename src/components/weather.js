@@ -246,7 +246,7 @@ export default function Weather() {
             case condition.includes('overcast') || condition.includes('cloudy'): // high cloudy     
                 reReturnCondtion = "carbon:cloudy"
                 break;
-            case condition.includes('fog'): // high cloudy     
+            case condition.includes('fog') || condition.includes('mist'): // high cloudy     
                 reReturnCondtion = "solar:fog-line-duotone"
                 break;
             case condition.includes('rain'):
