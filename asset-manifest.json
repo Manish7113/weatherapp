@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/weatherapp/static/css/main.db86fac0.css",
+    "main.css": "/weatherapp/static/css/main.144881d5.css",
     "main.js": "/weatherapp/static/js/main.ed4ae259.js",
     "static/media/p1cloudy.jpg": "/weatherapp/static/media/p1cloudy.78ca6ecf5a0858dc4f87.jpg",
     "static/media/prain.jpg": "/weatherapp/static/media/prain.4b43bda5ec3f0ea39dfe.jpg",
@@ -12,11 +12,11 @@
     "static/media/fog.jpg": "/weatherapp/static/media/fog.4294dbe90c0e6a52371a.jpg",
     "static/media/loading.png": "/weatherapp/static/media/loading.cf972d0743fab60ba0f1.png",
     "index.html": "/weatherapp/index.html",
-    "main.db86fac0.css.map": "/weatherapp/static/css/main.db86fac0.css.map",
+    "main.144881d5.css.map": "/weatherapp/static/css/main.144881d5.css.map",
     "main.ed4ae259.js.map": "/weatherapp/static/js/main.ed4ae259.js.map"
   },
   "entrypoints": [
-    "static/css/main.db86fac0.css",
+    "static/css/main.144881d5.css",
     "static/js/main.ed4ae259.js"
   ]
 }
